@@ -4,8 +4,8 @@
   "private": true,
   "main": "expo-router/entry",
   "scripts": {
-    "dev": "expo start",
-    "build": "expo export",
+    "dev": "node ../../scripts/patch-metro-exports.js && expo start",
+    "build": "node ../../scripts/patch-metro-exports.js && expo export",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf .expo dist node_modules"
