@@ -1,0 +1,16 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "exactOptionalPropertyTypes": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitReturns": true,
+    "paths": {
+      "@/*": ["./src/*"],
+      "@worlddex/shared-types": ["../../packages/shared-types/src/index.ts"],
+      "@worlddex/game-engine": ["../../packages/game-engine/src/index.ts"],
+      "@worlddex/supabase-schema": ["../../packages/supabase-schema/src/index.ts"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", ".expo/types/**/*.d.ts", "expo-env.d.ts"]
+}

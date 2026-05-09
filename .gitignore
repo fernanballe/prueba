@@ -1,0 +1,43 @@
+# Entorno — nunca subir a git
+.env
+.env.local
+.env.*.local
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Expo / React Native
+.expo/
+dist/
+web-build/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+.DS_Store
+*.log
+
+# Turbo
+.turbo/
+
+# iOS
+apps/mobile/ios/Pods/
+apps/mobile/ios/*.xcarchive
+apps/mobile/ios/build/
+
+# Android
+apps/mobile/android/.gradle/
+apps/mobile/android/app/build/
+apps/mobile/android/build/
+
+# TypeScript
+*.tsbuildinfo
+
+# VS Code
+.vscode/
