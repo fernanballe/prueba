@@ -4,12 +4,10 @@
     "slug": "worlddex",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
     "scheme": "worlddex",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/images/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#f5f0e8"
     },
@@ -23,7 +21,6 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#f5f0e8"
       },
       "package": "com.worlddex.app",
@@ -34,8 +31,7 @@
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "output": "static"
     },
     "plugins": [
       "expo-router",
@@ -44,13 +40,6 @@
         "expo-location",
         {
           "locationAlwaysAndWhenInUsePermission": "WorldDex necesita tu ubicación para verificar visitas GPS."
-        }
-      ],
-      [
-        "expo-notifications",
-        {
-          "icon": "./assets/images/notification-icon.png",
-          "color": "#c9a84c"
         }
       ]
     ],
