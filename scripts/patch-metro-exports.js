@@ -1,15 +1,12 @@
-// Arregla dos problemas de compatibilidad entre metro 0.84.x y @expo/metro-config + @expo/cli:
-//
-// 1. metro 0.82+ eliminó './src/*' del campo exports, que @expo/cli 0.22.x usa internamente.
-// 2. metro 0.84.x cambió sourceMapString.js a exports nombrados sin default,
-//    pero @expo/metro-config@0.19.12 espera un export default.
+// Arregla un problema de compatibilidad entre @expo/cli 0.22.x y metro 0.81.5:
+// metro 0.81+ eliminó './src/*' del campo exports, que @expo/cli usa internamente
+// (por ejemplo para './src/lib/TerminalReporter').
 
 const fs = require('fs');
 const path = require('path');
 
 const nodeModules = path.resolve(__dirname, '../node_modules');
 
-// ── Fix 1: añadir ./src/* al campo exports de todos los paquetes metro-* ──────
 const metroPackages = [
   'metro',
   'metro-cache',
@@ -45,10 +42,9 @@ for (const pkg of metroPackages) {
   console.log(`postinstall: parchado exports de ${pkg}@${pkgJson.version}`);
 }
 
-// ── Fix 2: añadir export default a sourceMapString.js ─────────────────────────
-// @expo/metro-config@0.19.12 hace require("metro/src/DeltaBundler/Serializers/sourceMapString")
-// y espera que .default sea la función sourceMapString, pero metro 0.84.x solo
-// tiene exports nombrados. Añadimos "exports.default = sourceMapString" al final.
+// Si una corrida previa dejó el parche legacy en sourceMapString.js (necesario
+// para metro 0.84.x pero rompe metro 0.81.x al referenciar un símbolo inexistente),
+// hay que limpiarlo.
 const sourceMapPath = path.join(
   nodeModules,
   'metro/src/DeltaBundler/Serializers/sourceMapString.js'
@@ -57,14 +53,13 @@ const sourceMapPath = path.join(
 if (fs.existsSync(sourceMapPath)) {
   const content = fs.readFileSync(sourceMapPath, 'utf8');
   const marker = '// patched: default export added';
-  if (!content.includes(marker)) {
-    fs.appendFileSync(
-      sourceMapPath,
-      `\n${marker}\nexports.default = sourceMapString;\n`
+  if (content.includes(marker)) {
+    const cleaned = content.replace(
+      /\n\/\/ patched: default export added\nexports\.default = sourceMapString;\n?/g,
+      ''
     );
-    console.log('postinstall: sourceMapString.js parchado — export default añadido.');
-  } else {
-    console.log('postinstall: sourceMapString.js ya está parchado.');
+    fs.writeFileSync(sourceMapPath, cleaned);
+    console.log('postinstall: sourceMapString.js — parche legacy eliminado.');
   }
 }
 
