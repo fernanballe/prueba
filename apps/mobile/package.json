@@ -11,6 +11,9 @@
     "clean": "rm -rf .expo dist node_modules"
   },
   "dependencies": {
+    "@expo-google-fonts/dm-mono": "^0.3.0",
+    "@expo-google-fonts/dm-sans": "^0.3.0",
+    "@expo-google-fonts/playfair-display": "^0.3.0",
     "@supabase/supabase-js": "^2.46.2",
     "@worlddex/game-engine": "*",
     "@worlddex/shared-types": "*",
