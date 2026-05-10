@@ -20,5 +20,12 @@
   "packageManager": "npm@10.9.7",
   "engines": {
     "node": ">=20.0.0"
+  },
+  "expo": {
+    "autolinking": {
+      "searchPaths": [
+        "./node_modules"
+      ]
+    }
   }
 }
