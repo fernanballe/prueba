@@ -8,7 +8,9 @@
     "build": "expo export",
     "lint": "eslint . --ext .ts,.tsx",
     "type-check": "tsc --noEmit",
-    "clean": "rm -rf .expo dist node_modules"
+    "clean": "rm -rf .expo dist node_modules",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   },
   "dependencies": {
     "@expo-google-fonts/dm-mono": "^0.3.0",
